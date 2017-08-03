@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Fastnet.Core.Web</id>
+    <version>$version$</version>
+    <title>Fastnet.Core.Web</title>
+    <authors>Asim</authors>
+    <owners>Asim</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Fastnet.Core.Web for Visual Studio 2017</description>
+    <releaseNotes>First release of Version 3</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags></tags>
+  </metadata>
+</package>
