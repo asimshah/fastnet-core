@@ -67,10 +67,20 @@ namespace Fastnet.Core.Web.Controllers
             return name;
         }
     }
+    public enum Browsers
+    {
+        Unknown,
+        Edge,
+        IE,
+        Chrome,
+        Firefox,
+        Safari
+    }
     public abstract class BaseController : Controller
     {
         public bool IsMobile { get; private set; }
         protected string userAgent;
+        protected Browsers browser;
         protected IHostingEnvironment env;
         protected BaseController(IHostingEnvironment env)
         {
@@ -80,6 +90,7 @@ namespace Fastnet.Core.Web.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             userAgent = Request?.UserAgent();
+            browser = ParseForBrowser();
             IsMobile = Request != null ? Request.IsMobileBrowser() : false;
             ViewData["IsMobile"] = IsMobile;
             base.OnActionExecuting(context);
@@ -111,6 +122,36 @@ namespace Fastnet.Core.Web.Controllers
         {
             DataResult dr = new DataResult { success = false, data = null, exceptionMessage = exceptionMessage, message = message };
             return new ObjectResult(dr);
+        }
+        private Browsers ParseForBrowser()
+        {
+            Browsers browser = Browsers.Unknown;
+            var text = userAgent.ToLower();
+            if (text.Contains("edge"))
+            {
+                browser = Browsers.Edge;
+            }
+            else if (text.Contains("safari"))
+            {
+                browser = Browsers.Safari;
+            }
+            else if (text.Contains("firefox"))
+            {
+                browser = Browsers.Firefox;
+            }
+            else if(text.Contains("msie"))
+            {
+                browser = Browsers.IE;
+            }
+            else if (text.Contains("iemobile"))
+            {
+                browser = Browsers.IE;
+            }
+            else if(text.Contains("chrome"))
+            {
+                browser = Browsers.Chrome;
+            }
+            return browser;
         }
     }
 
