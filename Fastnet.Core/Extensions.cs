@@ -16,14 +16,18 @@ namespace Fastnet.Core.Extensions
             var v = typeInfo.DeclaredMembers.First(x => x.Name == enumVal.ToString());
             return v.GetCustomAttribute<T>();
         }
-        public static T Set<T>(this Enum value, T flag)
-        {
-            return (T)(object)((int)(object)value | (int)(object)flag);
-        }
-        public static T Unset<T>(this Enum value, T flag)
-        {
-            return (T)(object)((int)(object)value & ~(int)(object)flag);
-        }
+        // use flags |= flag
+        //[Obsolete]
+        //public static T Set<T>(this Enum value, T flag)
+        //{
+        //    return (T)(object)((int)(object)value | (int)(object)flag);
+        //}
+        //// use flags &= ~flag
+        //[Obsolete]
+        //public static T Unset<T>(this Enum value, T flag)
+        //{
+        //    return (T)(object)((int)(object)value & ~(int)(object)flag);
+        //}
         /// <summary>
         /// Gets the text of the description attribute on an enum value
         /// </summary>

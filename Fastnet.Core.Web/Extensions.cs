@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -69,6 +70,15 @@ namespace Fastnet.Core.Web
                 }
             }
             return browser;
+        }
+        public static string GetComparableAddress(this IPAddress addr)
+        {
+            var text = addr.ToString();
+            if (addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+            {
+                text = text.Substring(0, text.IndexOf("%"));
+            }
+            return text;
         }
     }
 }
